@@ -1,0 +1,12 @@
+{
+    "env":{
+        "MONGO_USER":"amr",
+        "MONGO_PASSWORD":"amr2242001",
+        "MONGO_DEFAULT_DATABASE":"shop"
+
+
+    }
+
+
+
+}
