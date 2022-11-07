@@ -11,14 +11,13 @@ const MongodbStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const multer = require("multer");
-const helmet = require('helmet');
-const compression = require('compression');
-const morgan = require('morgan');
-const fs = require('fs');
-const https = require('https');
+const helmet = require("helmet");
+const compression = require("compression");
+const morgan = require("morgan");
+const fs = require("fs");
+const https = require("https");
 
-const MONGODB_URI =
-  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.wdl7qor.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.wdl7qor.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 const store = MongodbStore({
   uri: MONGODB_URI,
   collection: "sessions",
@@ -40,11 +39,10 @@ const fileFilter = (req, file, cb) => {
   }
 };
 const fileStorage = multer.diskStorage({
-  destination:  (req, file, cb)=> {
+  destination: (req, file, cb) => {
     cb(null, "images");
   },
-  filename:(req, file, cb)=> {
-   
+  filename: (req, file, cb) => {
     const currentDate = new Date().toISOString();
     const customDate = currentDate.replace(/:/g, "-");
     cb(null, customDate + "-" + file.originalname);
@@ -57,18 +55,21 @@ app.set("views", "views");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
-const accessLogStream = fs.createWriteStream(path.join(__dirname , 'access.log'),{flags:'a'})
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
 
-app.use(helmet());//can save a response header and put some strange data in it;
-app.use(compression());//بتضغط الملفات الخاصه بالستايل سواء كانت صور او اي حاجه عشان يكون حجمها صغير
-app.use(morgan('combined',{stream:accessLogStream}))// can help me as a can get a log that info coming in request and save it in a file with extinction .log
+app.use(helmet()); //can save a response header and put some strange data in it;
+app.use(compression()); //بتضغط الملفات الخاصه بالستايل سواء كانت صور او اي حاجه عشان يكون حجمها صغير
+app.use(morgan("combined", { stream: accessLogStream })); // can help me as a can get a log that info coming in request and save it in a file with extinction .log
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/images',express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(
   session({
     secret: "my secret",
@@ -132,7 +133,7 @@ mongoose
   .then((result) => {
     console.log("connected");
     // https.createServer({key:privateKey,cert:certificate},app).listen(process.env.PORT || 5000);
-    app.listen(process.env.PORT||5000)
+    app.listen(process.env.PORT || 5000);
   })
   .catch((err) => {
     console.log(err);
