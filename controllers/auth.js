@@ -121,13 +121,7 @@ exports.postSignup = (req, res, next) => {
     });
   }
 
-  // User.findOne({ email: email })
-  //   .then((userDoc) => {
-  //     if (userDoc) {
-  //       req.flash("error", "Email is Already Exists please choose another one");
-
-  //       return res.redirect("/signup");
-  //     }
+ 
   bcrypt
     .hash(password, 12)
     .then((hashPassword) => {

@@ -46,36 +46,10 @@ exports.getProducts = (req, res, next) => {
 
 
 
-  // Product.find()
-  //   .then((products) => {
-  //     console.log(products);
-  //     res.render("shop/product-list", {
-  //       prods: products,
-  //       pageTitle: "Shop",
-  //       path: "/products",
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     const error = new Error(err);
-  //     error.httpStatusCode = 500;
-  //     return next(error);
-  //   });
-
-  //console.log("shop js" , adminData.products);
-  //console.log("in the home");
-  //res.sendFile(path.join(rootDir,'views','shop.html'));
 };
 exports.getProduct = (req, res) => {
   const prodId = req.params.productId;
-  //   Product.findAll({ where: { id: prodId } })
-  //     .then((products) => {
-  //       res.render("shop/product-detail", {
-  //         product: products[0],
-  //         pageTitle: products[0].title,
-  //         path: "/products",
-  //       });
-  //     })
-  // .catch((err) => console.log(err));
+  
   Product.findById(prodId)
     .then((product) => {
       console.log(product);
@@ -121,9 +95,7 @@ let totalItems ;
       return next(error);
     });
 
-  //console.log("shop js" , adminData.products);
-  //console.log("in the home");
-  //res.sendFile(path.join(rootDir,'views','shop.html'));
+  
 };
 
 exports.getCart = (req, res, next) => {
@@ -144,19 +116,7 @@ exports.getCart = (req, res, next) => {
       return next(error);
     });
 
-  //   Cart.getCart((cart) => {
-  //     Product.fetchAll((products) => {
-  //       const cartProduct = [];
-  //       for (product of products) {
-  //         const cartProductData = cart.products.find(
-  //           (prod) => prod.id === product.id
-  //         );
-  //         if (cartProductData)
-  //           cartProduct.push({ productData: product, qty: cartProductData.qty });
-  //       }
-  //
-  //     });
-  //   });
+  
 };
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
@@ -168,44 +128,7 @@ exports.postCart = (req, res, next) => {
       console.log(result);
       res.redirect("/cart");
     });
-  // let newQuantity = 1;
-
-  // let fetchedCart;
-  // req.user
-  //   .getCart()
-  //   .then((cart) => {
-  //     fetchedCart = cart;
-  //     return cart.getProducts({ where: { id: prodId } });
-  //   })
-  //   .then((products) => {
-  //     let product;
-  //     if (products.length > 0) {
-  //       product = products[0];
-  //     }
-  //     if (product) {
-  //       const oldQuantity = product.cartItem.quantity;
-  //       newQuantity = oldQuantity + 1;
-  //       return product;
-  //     }
-  //     return Product.findByPk(prodId)
-  //       .then((product) => {
-  //         return fetchedCart.addProduct(product, {
-  //           through: { quantity: newQuantity },
-  //         });
-  //       })
-  //       .catch((err) => console.log(err));
-  //   })
-
-  //   .then(() => {
-  //
-  //   })
-  //   .catch((err) => console.log(err));
-
-  //     const prodId = req.body.productId;
-  //     Product.findById(prodId, (product) => {
-  //     Cart.addProduct(prodId, product.price);
-  //   });
-  //   res.redirect("/cart");
+ 
 };
 exports.getOrders = (req, res, next) => {
   Order.find({ "user.userId": req.user._id })
@@ -260,10 +183,7 @@ exports.postCartDeleteProduct = (req, res) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  //   Product.findById(prodId, (product) => {
-  //     Cart.deleteProduct(prodId, product.price);
-
-  //   });
+  
 };
 
 exports.getInvoice = (req, res, next) => {
@@ -296,20 +216,7 @@ exports.getInvoice = (req, res, next) => {
           pdfDoc.text('-----------------')
           pdfDoc.fontSize(30).text('Total Price $' + totalPrice)
         pdfDoc.end();
-      // fs.readFile(invoicePath, (err, data) => {
-      //   if (err) {
-      //     return next();
-      //   }
-      //   res.setHeader("Content-Type", "application/pdf");
-      //   res.setHeader(
-      //     "Content-Disposition",
-      //     'inline;filename="' + invoiceName + '"'
-      //   );
-      //   res.send(data);
-      // });
-      // const file = fs.createReadStream(invoicePath);
-     
-      //   file.pipe(res)
+    
     })
     .catch((err) => next(err));
 };
@@ -341,30 +248,5 @@ exports.postOrder = (req, res) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  // let fetchCart;
-  // .getCart()
-  // .then((cart) => {
-  //   fetchCart = cart;
-  //   return cart.getProducts();
-  // })
-  // .then((products) => {
-  //   return req.user
-  //     .createOrder()
-  //     .then((order) => {
-  //       return order.addProducts(
-  //         products.map((product) => {
-  //           product.orderItem = { quantity: product.cartItem.quantity };
-  //           return product;
-  //         })
-  //       );
-  //     })
-  //     .catch((err) => console.log(err));
-  // })
-  // .then((result) => {
-  //   fetchCart.setProducts(null);
-  // })
-  // .then((results) => {
-  //   res.redirect("/orders");
-  // })
-  // .catch((err) => console.log(err));
+  
 };
