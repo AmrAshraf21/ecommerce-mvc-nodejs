@@ -3,15 +3,15 @@
 
 # Technology that i used : 
 > - # Backend 
-- >  [x] Nodejs
-- >  [x] ExpressJs
-- >  [x] ejs template engine for a views `frontend`
-- >  [x] mongoose ORM to make deal with database
-- >  [x] Mognodb and specific Monogo Atlas to store data
-- >  [x] express-validator to make a Validation
-- >  [x] Authintaction and Authorization
-- >  [x] error Handling
-- >  [x]using multer to dealing with file ex:image and pdf
+ - [x] Nodejs
+-   [x] ExpressJs
+-   [x] ejs template engine for a views `frontend`
+-   [x] mongoose ORM to make deal with database
+-   [x] Mognodb and specific Monogo Atlas to store data
+-   [x] express-validator to make a Validation
+-   [x] Authintaction and Authorization
+-   [x] error Handling
+-   [x] using multer to dealing with file ex:image and pdf
  
 
 ---
